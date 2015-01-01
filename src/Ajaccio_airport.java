@@ -9,7 +9,10 @@ public class Ajaccio_airport {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		
+		APP_Ajaccio app = new APP_Ajaccio();
+		app.getData();
+		
 	}
 
 }

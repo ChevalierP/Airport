@@ -2,6 +2,8 @@ import java.util.ArrayList;
 
 public class APP_Ajaccio {
 
+	ArrayList list;
+
 	public APP_Ajaccio() {
 
 	}
@@ -16,5 +18,6 @@ public class APP_Ajaccio {
 			System.out.println(inputData.get(i));
 
 		}
+		this.list = inputData;
 	}
 }
