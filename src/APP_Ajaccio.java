@@ -1,22 +1,20 @@
 import java.util.ArrayList;
 
-public class Ajaccio {
+public class APP_Ajaccio {
 
-	
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public APP_Ajaccio() {
 
-		Reader r = new Reader();
-		
-		ArrayList<String> inputData = new ArrayList<String>();
-		inputData = r.readFile("input.csv");
-		
-		for (int i = 0; i<inputData.size(); i++)
-		{
-			System.out.println(inputData.get(i));
-			
-		}
 	}
 
+	public void getData() {
+		Reader r = new Reader();
+
+		ArrayList<String> inputData = new ArrayList<String>();
+		inputData = r.readFile("input.csv");
+
+		for (int i = 0; i < inputData.size(); i++) {
+			System.out.println(inputData.get(i));
+
+		}
+	}
 }
