@@ -13,6 +13,7 @@ public class Airport {
 		for (int i = 0; i<inputData.size(); i++)
 		{
 			System.out.println(inputData.get(i));
+			
 		}
 	}
 
