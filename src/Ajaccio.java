@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 
-public class Airport {
+public class Ajaccio {
 
+	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
