@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Airport {
 
 	public static void main(String[] args) {
@@ -5,8 +7,13 @@ public class Airport {
 
 		Reader r = new Reader();
 		
-		r.readFile("input.csv");
+		ArrayList<String> inputData = new ArrayList<String>();
+		inputData = r.readFile("input.csv");
 		
+		for (int i = 0; i<inputData.size(); i++)
+		{
+			System.out.println(inputData.get(i));
+		}
 	}
 
 }
