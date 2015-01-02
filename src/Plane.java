@@ -1,23 +1,27 @@
-
 public class Plane extends Thread {
 
-	double xCurrentPos, yCurrentPos, xTargetPos, yTargetPos, xInitialPos,yInitialPos;
+	double xCurrentPos, yCurrentPos, xTargetPos, yTargetPos, xInitialPos,
+			yInitialPos;
 	double speed = 0;
-	
-	public Plane(int xdepart, int ydepart, int xArrivee, int yArrivee)
-	{
+	String flightName, targetName, timeOfDeparture;
+
+	public Plane(double xdepart, double ydepart, String flightName,
+			String targetName, String timeOfDeparture) {
 		xCurrentPos = xdepart;
 		yCurrentPos = ydepart;
-		
+
 		xInitialPos = xdepart;
 		yInitialPos = ydepart;
-		
-		xTargetPos = xArrivee;
-		yTargetPos = yArrivee;
+
+		this.flightName = flightName;
+		this.targetName = targetName;
 	}
-	
-	public void run()
-	{
+
+	public void run() {
+		
+//		System.out.println(this.flightName + ":" +" Ready to go !");
+//		System.out.println("To "+ targetName);
+//		System.out.println("At " + timeOfDeparture);
 		
 	}
 }
