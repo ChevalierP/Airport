@@ -26,13 +26,9 @@ public class APP_Ajaccio {
 			String targetName = (String)list.get(i + 1);
 			String timeOfDeparture = (String)list.get(i + 2);
 			
-			System.out.println(flightName + " " + targetName + " " + timeOfDeparture);
-			
-//			Thread plane = new Plane(airport.getXpos(), airport.getYpos(),
-//					flightName, targetName, timeOfDeparture);
-//			plane.start();
-//			
-//			System.out.println(list.get(i + 2));
+			Thread plane = new Plane(airport.getXpos(), airport.getYpos(),
+					flightName, targetName, timeOfDeparture);
+			plane.start();
 		}
 	}
 }

@@ -15,13 +15,14 @@ public class Plane extends Thread {
 
 		this.flightName = flightName;
 		this.targetName = targetName;
+		this.timeOfDeparture = timeOfDeparture;
 	}
 
 	public void run() {
 		
-//		System.out.println(this.flightName + ":" +" Ready to go !");
-//		System.out.println("To "+ targetName);
-//		System.out.println("At " + timeOfDeparture);
+		System.out.println(this.flightName + ":" +" Ready to go !");
+		System.out.println("To "+ targetName);
+		System.out.println("At " + timeOfDeparture);
 		
 	}
 }
