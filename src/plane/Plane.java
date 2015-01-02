@@ -1,3 +1,5 @@
+package plane;
+
 public class Plane extends Thread {
 
 	double xCurrentPos, yCurrentPos, xTargetPos, yTargetPos, xInitialPos,
@@ -19,10 +21,10 @@ public class Plane extends Thread {
 	}
 
 	public void run() {
-		
-		System.out.println(this.flightName + ":" +" Ready to go !");
-		System.out.println("To "+ targetName);
+
+		System.out.println(this.flightName + ":" + " Ready to go !");
+		System.out.println("To " + targetName);
 		System.out.println("At " + timeOfDeparture);
-		
+
 	}
 }
