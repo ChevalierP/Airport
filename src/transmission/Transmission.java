@@ -1,12 +1,15 @@
 package transmission;
 
+import java.io.IOException;
+import java.net.InetAddress;
+
 public abstract class Transmission {
 
 	protected int portNumber;
-	protected int IPAddress;
+	protected InetAddress IPAddress;
 
 	abstract void communicate();
 
-	abstract void create();
+	public abstract void create() throws IOException;
 
 }
