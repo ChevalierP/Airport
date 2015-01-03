@@ -3,7 +3,7 @@ package airport;
 import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 
-import plane.Plane;
+import threads.Plane;
 import data.Reader;
 
 public class APP_Ajaccio {
