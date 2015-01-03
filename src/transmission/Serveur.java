@@ -1,5 +1,12 @@
 package transmission;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 public class Serveur extends Transmission {
 
 	public Serveur(int portNumber) {
@@ -14,9 +21,23 @@ public class Serveur extends Transmission {
 	}
 
 	@Override
-	void create() {
-		// TODO Auto-generated method stub
+	public void create() throws IOException {
+
+		System.out.println("Serveur créé");
+		ServerSocket welcomeSocket = new ServerSocket(portNumber);
+		while (true) {
+			Socket connectionSocket = welcomeSocket.accept();
+
+			BufferedReader inFromClient = new BufferedReader(
+					new InputStreamReader(connectionSocket.getInputStream()));
+
+			DataOutputStream outToClient = new DataOutputStream(
+					connectionSocket.getOutputStream());
+
+			outToClient.writeBytes(inFromClient.readLine());
+
+		welcomeSocket.close();
+		}
 
 	}
-
 }
