@@ -28,9 +28,7 @@ public class Reader {
 				String champ;
 				while (s.hasNext()) {
 					champ = s.next();
-					if (s.next() != null && s.next(s.next()) != null) {
-						inputData.add(champ);
-					}
+					inputData.add(champ);
 				}
 
 			} finally { // libération de la ressource
