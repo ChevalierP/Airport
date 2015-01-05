@@ -31,9 +31,10 @@ public class Plane extends Thread {
 		System.out.println(this.flightName + ":" + " Ready to go !");
 		System.out.println("To " + targetName);
 		System.out.println("At " + timeOfDeparture);
-		
+
 		try {
-			Transmission planeClient = new Client(2341, InetAddress.getLocalHost());
+			Transmission planeClient = new Client(2341,
+					InetAddress.getLocalHost());
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

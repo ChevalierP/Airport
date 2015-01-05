@@ -23,7 +23,6 @@ public class Serveur extends Transmission {
 	@Override
 	public void create() throws IOException {
 
-		System.out.println("Serveur créé");
 		ServerSocket welcomeSocket = new ServerSocket(portNumber);
 		while (true) {
 			Socket connectionSocket = welcomeSocket.accept();
@@ -34,9 +33,11 @@ public class Serveur extends Transmission {
 			DataOutputStream outToClient = new DataOutputStream(
 					connectionSocket.getOutputStream());
 
+			System.out.println(inFromClient.readLine());
+
 			outToClient.writeBytes(inFromClient.readLine());
 
-		welcomeSocket.close();
+			welcomeSocket.close();
 		}
 
 	}

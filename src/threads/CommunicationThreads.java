@@ -16,11 +16,9 @@ public class CommunicationThreads extends Thread {
 
 	public void run() {
 
-		System.out.println("thread lancé");
 		Transmission CCRServeur = new Serveur(this.portNumber);
 		try {
 			CCRServeur.create();
-			System.out.println("création de serveur demandée");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

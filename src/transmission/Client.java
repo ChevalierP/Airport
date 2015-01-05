@@ -34,6 +34,7 @@ public class Client extends Transmission {
 		String modifiedSentence = inFromServer.readLine();
 		
 		System.out.println("Recu : " + modifiedSentence);
-		clientSocket.close();
+		
+		//clientSocket.close();
 	}
 }
