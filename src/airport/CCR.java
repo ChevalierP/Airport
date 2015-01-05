@@ -16,6 +16,7 @@ public class CCR extends Airport {
 	public void create() {
 		// TODO Auto-generated method stub
 		CommunicationThreads ServerThread = new CommunicationThreads(2341);
+
 		ServerThread.start();
 
 	}
