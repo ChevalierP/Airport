@@ -1,8 +1,6 @@
 package threads;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
+import java.io.IOException;
 import transmission.Client;
 import transmission.Transmission;
 
@@ -32,10 +30,10 @@ public class Plane extends Thread {
 		System.out.println("To " + targetName);
 		System.out.println("At " + timeOfDeparture);
 
+		Transmission planeClient = new Client(2341);
 		try {
-			Transmission planeClient = new Client(2341,
-					InetAddress.getLocalHost());
-		} catch (UnknownHostException e) {
+			planeClient.create();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

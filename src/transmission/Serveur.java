@@ -1,7 +1,6 @@
 package transmission;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
@@ -23,6 +22,7 @@ public class Serveur extends Transmission {
 	@Override
 	public void create() throws IOException {
 
+		@SuppressWarnings("resource")
 		ServerSocket welcomeSocket = new ServerSocket(portNumber);
 		while (true) {
 			Socket connectionSocket = welcomeSocket.accept();
@@ -30,14 +30,12 @@ public class Serveur extends Transmission {
 			BufferedReader inFromClient = new BufferedReader(
 					new InputStreamReader(connectionSocket.getInputStream()));
 
-			DataOutputStream outToClient = new DataOutputStream(
-					connectionSocket.getOutputStream());
+//			DataOutputStream outToClient = new DataOutputStream(
+//					connectionSocket.getOutputStream());
 
 			System.out.println(inFromClient.readLine());
 
-			outToClient.writeBytes(inFromClient.readLine());
-
-			welcomeSocket.close();
+			//welcomeSocket.close();
 		}
 
 	}
