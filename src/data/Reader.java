@@ -12,7 +12,7 @@ public class Reader {
 	public Reader() {
 	}
 
-	public ArrayList<String> readFile(String name) {
+	public ArrayList<String> readFile(String name, String delimiter) {
 
 		ArrayList<String> inputData = new ArrayList<String>();
 		try {
@@ -23,7 +23,7 @@ public class Reader {
 
 			try {
 				// utilisation de la ressource
-				s.useDelimiter(";");
+				s.useDelimiter(delimiter);
 
 				String champ;
 				while (s.hasNext()) {

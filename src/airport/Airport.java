@@ -29,7 +29,7 @@ public abstract class Airport {
 		Reader r = new Reader();
 
 		ArrayList<String> inputData = new ArrayList<String>();
-		inputData = r.readFile("input.csv");
+		inputData = r.readFile("input.csv", ";");
 
 		this.list = inputData;
 	}
