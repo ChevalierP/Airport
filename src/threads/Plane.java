@@ -1,8 +1,7 @@
 package threads;
 
-import java.io.IOException;
-import transmission.Client;
-import transmission.Transmission;
+import data.DelayedTask;
+import data.Hour;
 
 public class Plane extends Thread {
 
@@ -10,6 +9,7 @@ public class Plane extends Thread {
 			yInitialPos;
 	double speed = 0;
 	String flightName, targetName, timeOfDeparture;
+	Hour h;
 
 	public Plane(double xdepart, double ydepart, String flightName,
 			String targetName, String timeOfDeparture) {
@@ -22,21 +22,20 @@ public class Plane extends Thread {
 		this.flightName = flightName;
 		this.targetName = targetName;
 		this.timeOfDeparture = timeOfDeparture;
+		this.h = new Hour();
 	}
 
 	public void run() {
 
-		System.out.println(this.flightName + ":" + " Ready to go !");
-		System.out.println("To " + targetName);
-		System.out.println("At " + timeOfDeparture);
+		int timeInMS = h.getHourInMS(this.timeOfDeparture);
 
-		Transmission planeClient = new Client(2341);
-		try {
-			planeClient.create();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		System.out.println(1);
 
+		DelayedTask dTask = new DelayedTask(timeInMS, flightName, targetName,
+				timeOfDeparture);
+
+		dTask.dTask();
+
+		System.out.println(2);
 	}
 }

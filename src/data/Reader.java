@@ -28,7 +28,12 @@ public class Reader {
 				String champ;
 				while (s.hasNext()) {
 					champ = s.next();
-					champ = champ.replaceAll("(\\r|\\n|\\t)", "");// pour supprimer les \r\n du fichier lu
+					champ = champ.replaceAll("(\\r|\\n|\\t)", "");// pour
+																	// supprimer
+																	// les \r\n
+																	// du
+																	// fichier
+																	// lu
 					inputData.add(champ);
 				}
 
