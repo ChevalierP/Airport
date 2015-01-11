@@ -28,6 +28,7 @@ public class Reader {
 				String champ;
 				while (s.hasNext()) {
 					champ = s.next();
+					champ = champ.replaceAll("(\\r|\\n|\\t)", "");// pour supprimer les \r\n du fichier lu
 					inputData.add(champ);
 				}
 
@@ -36,8 +37,7 @@ public class Reader {
 			}
 
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			System.out.println("Le fichier indiqué n'existe pas.");
 		}
 
 		return inputData;

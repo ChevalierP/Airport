@@ -14,10 +14,12 @@ public class ReaderTests {
 	
 	
 	@Test
-	public void test() {
-		
+	public void testReadFile() {
+		//lecture du fichier d'input de test
 		Reader r = new Reader();
 		ArrayList<String> testArray = r.readFile("input.csv", ";");
+		
+		//construction du tableau attendu
 		ArrayList<String> expectedArray = new ArrayList<String>();
 		expectedArray.add("Vol000");
 		expectedArray.add("Toulouse");
@@ -46,13 +48,15 @@ public class ReaderTests {
 		expectedArray.add("Vol006");
 		expectedArray.add("Metz");
 		expectedArray.add("01:30:00");
+		expectedArray.add("");
 
+		//comparaison du tableau obtenu avec celui attendu
 		assertEquals(expectedArray, testArray);
 	}
 	
 	@SuppressWarnings("deprecation")
 	@Test
-	public void hourInMS() {
+	public void testHourInMS() {
 		
 		Hour h = new Hour();
 		int hourInMS = h.getHourInMS("00:10:05");
@@ -61,8 +65,8 @@ public class ReaderTests {
 		expected[1] = "10";
 		expected[2] = "05";
 		
-		assertEquals( 605000 , hourInMS);
-		assertEquals( h.tokens , expected);
+		assertEquals( 605000 , hourInMS); // on vérifie que la conversion est correcte
+		assertEquals( h.tokens , expected); // on véfifie que chaque élément du tableau est le bon
 		
 		}
 
