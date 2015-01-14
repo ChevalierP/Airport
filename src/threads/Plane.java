@@ -29,13 +29,9 @@ public class Plane extends Thread {
 
 		int timeInMS = h.getHourInMS(this.timeOfDeparture);
 
-		System.out.println(1);
-
 		DelayedTask dTask = new DelayedTask(timeInMS, flightName, targetName,
 				timeOfDeparture);
 
 		dTask.dTask();
-
-		System.out.println(2);
 	}
 }
