@@ -8,8 +8,8 @@ public class Start {
 		// TODO Auto-generated method stub
 		//614.2, -190.1 Ajaccio
 		// creation de l'aeroport (CCR + APP)
-		Airport Ajaccio_CCR = new CCR(Double.parseDouble(args[0]), Double.parseDouble(args[1]));
-		Airport Ajaccio_APP = new APP(Double.parseDouble(args[0]), Double.parseDouble(args[1]));
+		Airport ajaccio_CCR = new CCR(Double.parseDouble(args[0]), Double.parseDouble(args[1]));
+		Airport ajaccio_APP = new APP(Double.parseDouble(args[0]), Double.parseDouble(args[1]));
 
 		System.out.println(Double.parseDouble(args[0]));
 		System.out.println(Double.parseDouble(args[1]) + "\n");
