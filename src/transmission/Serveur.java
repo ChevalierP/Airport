@@ -33,7 +33,7 @@ public class Serveur extends Transmission {
 //			DataOutputStream outToClient = new DataOutputStream(
 //					connectionSocket.getOutputStream());
 
-			System.out.println(inFromClient.readLine());
+			System.out.println(inFromClient.readLine() + " received");
 
 			//welcomeSocket.close();
 		}
