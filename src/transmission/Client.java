@@ -26,8 +26,8 @@ public class Client extends Transmission {
 
 //		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(
 //				clientSocket.getInputStream()));
-
-		outToServer.writeBytes("blabla \r\n");
+		outToServer.writeBytes("Take-Off request \r\n");
+		System.out.println("Take-Off request send");
 
 		clientSocket.close();
 	}
