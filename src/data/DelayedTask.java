@@ -27,9 +27,9 @@ public class DelayedTask {
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
 			public void run() {
-				System.out.println(flightName + ":" + " Ready to go !");
+				System.out.println("\n" + flightName + ":" + " Ready to go !");
 				System.out.println("To " + targetName);
-				System.out.println("At " + timeOfDeparture);
+				System.out.println("At " + timeOfDeparture + "\n");
 
 				Transmission planeClient = new Client(2341);
 				try {
