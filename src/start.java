@@ -6,7 +6,7 @@ public class start {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//614.2, -190.1
+		//614.2, -190.1 Ajaccio
 		// creation de l'aeroport (CCR + APP)
 		Airport Ajaccio_CCR = new CCR(Double.parseDouble(args[0]), Double.parseDouble(args[1]));
 		Airport Ajaccio_APP = new APP(Double.parseDouble(args[0]), Double.parseDouble(args[1]));
