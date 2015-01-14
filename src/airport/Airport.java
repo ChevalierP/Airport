@@ -15,13 +15,13 @@ public abstract class Airport {
 	protected double xPos = 0;
 	protected double yPos = 0;
 
-	Semaphore piste = new Semaphore(1);
-	Semaphore parking = new Semaphore(30);
+	public Semaphore piste = new Semaphore(1);
+	public Semaphore parking = new Semaphore(30);
 
-	Semaphore waitingAreaAlt500 = new Semaphore(5);;
-	Semaphore waitingAreaAlt1000 = new Semaphore(5);;
-	Semaphore waitingAreaAlt1500 = new Semaphore(5);;
-	Semaphore waitingAreaAlt2000 = new Semaphore(5);;
+	public Semaphore waitingAreaAlt500 = new Semaphore(5);;
+	public Semaphore waitingAreaAlt1000 = new Semaphore(5);;
+	public Semaphore waitingAreaAlt1500 = new Semaphore(5);;
+	public Semaphore waitingAreaAlt2000 = new Semaphore(5);;
 
 	public abstract void create();
 
