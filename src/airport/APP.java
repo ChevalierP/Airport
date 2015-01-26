@@ -3,11 +3,15 @@ package airport;
 import threads.Plane;
 
 public class APP extends Airport {
+	
+	double xpos, ypos;
+	Airport airport;
 
-	public APP(double xPos, double yPos) {
+	public APP(double xPos, double yPos, Airport airport) {
 
 		this.xPos = xPos;
 		this.yPos = yPos;
+		this.airport = airport;
 	}
 
 	/*
@@ -29,7 +33,7 @@ public class APP extends Airport {
 																// in input.csv
 
 			Thread plane = new Plane(xPos, yPos, flightName, targetName,
-					timeOfDeparture);
+					timeOfDeparture, this.airport);
 			plane.start();
 		}
 	}
