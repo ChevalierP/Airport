@@ -6,7 +6,7 @@ import data.Hour;
 
 public class Plane extends Thread {
 
-	public double xCurrentPos, yCurrentPos, xTargetPos, yTargetPos, xInitialPos,
+	public double xCurrentPos, yCurrentPos, zCurrentPos, xTargetPos, yTargetPos, xInitialPos,
 			yInitialPos;
 	public double speed = 0;
 	String flightName, targetName, timeOfDeparture;
@@ -17,7 +17,8 @@ public class Plane extends Thread {
 			String targetName, String timeOfDeparture, Airport airport) {
 		xCurrentPos = xdepart;
 		yCurrentPos = ydepart;
-
+		zCurrentPos = 0;
+		
 		xInitialPos = xdepart;
 		yInitialPos = ydepart;
 

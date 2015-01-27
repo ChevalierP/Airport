@@ -1,8 +1,8 @@
 package data;
 
-public class Position {
+public class Trajectory {
 
-	public Position()
+	public Trajectory()
 	{
 		
 	}

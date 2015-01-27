@@ -1,13 +1,10 @@
 package data;
 
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import airport.Airport;
 import threads.Plane;
-import transmission.Client;
-import transmission.Transmission;
 
 public class DelayedTask {
 
@@ -42,8 +39,9 @@ public class DelayedTask {
 					System.out.println("Acquire sur le cercle d'attente");
 					airport.piste.acquire();
 					System.out.println("Acquire sur la piste");
-					
-					 updateTask();
+
+					updateTask();
+					takeOfTask();
 					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
@@ -56,31 +54,33 @@ public class DelayedTask {
 	public void updateTask() {
 
 		Timer timer = new Timer();
-		final Position p = new Position();
-		
+		final Trajectory p = new Trajectory();
+
 		TimerTask task = new TimerTask() {
 			public void run() {
-				if(plane.speed < 300)
-				{
-				plane.xCurrentPos = p.xposTakeOfupdate(plane.xCurrentPos);
-				plane.speed = p.speedTakeOfupdate(plane.speed);
+				if (plane.speed < 300) {
+					plane.xCurrentPos = p.xposTakeOfupdate(plane.xCurrentPos);
+					plane.speed = p.speedTakeOfupdate(plane.speed);
 
-				System.out.println("[" + flightName + " Xpos]" + plane.xCurrentPos);
-				System.out.println("[" + flightName + " Speed]" + plane.speed);
-				
+					System.out.println("[" + flightName + " Xpos]"
+							+ plane.xCurrentPos);
+					System.out.println("[" + flightName + " Speed]"
+							+ plane.speed);
+
 				}
-				if(plane.speed >= 300)
-				{
-					airport.piste.release();
-					}
-
 			}
 		};
-		timer.scheduleAtFixedRate(task, 0 , 100);
-
+		timer.scheduleAtFixedRate(task, 0, 10);
 	}
 
 	public void takeOfTask() {
+
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			public void run() {
+				airport.piste.release();
+			}
+		}, 4800);
 
 	}
 }
