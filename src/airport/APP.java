@@ -37,10 +37,4 @@ public class APP extends Airport {
 			plane.start();
 		}
 	}
-
-	@Override
-	public void writeFile() {
-		// TODO Auto-generated method stub
-
-	}
 }

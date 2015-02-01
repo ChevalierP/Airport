@@ -15,6 +15,7 @@ public class DelayedTask {
 	Airport airport;
 	Plane plane;
 	final Trajectory p = new Trajectory();
+	final Reader reader = new Reader();
 
 	public DelayedTask(int delay, String flightName, String targetName,
 			String timeOfDeparture, Airport airport, Plane plane) {
@@ -39,10 +40,17 @@ public class DelayedTask {
 					airport.waitingAreaAlt500.acquire();
 					System.out.println("Acquire sur le cercle d'attente");
 					airport.piste.acquire();
-					System.out.println("Acquire sur la piste");
+					reader.writeFile(plane.flightName + " s'aligne sur la piste à " + plane.h.msToFullHour(plane.time) + "\n", "Output" + plane.xInitialPos);
 
 					updateTask();
-					takeOfTask();
+					takeOffTask();
+					
+					while(plane.zCurrentPos > 0.5)
+					{
+						reader.writeFile(String.valueOf(plane.time) + "\n", "Output" + plane.xInitialPos);
+
+					}
+					reader.writeFile(plane.flightName + " arrive sur le premier cercle d'attente à " + plane.h.msToFullHour(plane.time) + "\n", "Output" + plane.xInitialPos);
 
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
@@ -59,12 +67,12 @@ public class DelayedTask {
 		TimerTask task = new TimerTask() {
 			public void run() {
 				if (plane.speed < 300) {
-					plane.xCurrentPos = p.xposTakeOfupdate(plane.xCurrentPos);
-					plane.speed = p.speedTakeOfupdate(plane.speed);
+					plane.xCurrentPos = p.xposTakeOffupdate(plane.xCurrentPos);
+					plane.speed = p.speedTakeOffupdate(plane.speed);
 
-					System.out.println("[" + flightName + " Xpos]"
+					System.out.println("[" + flightName + "]" + " Xpos : "
 							+ plane.xCurrentPos);
-					System.out.println("[" + flightName + " Speed]"
+					System.out.println("[" + flightName + "]" + " Speed : "
 							+ plane.speed);
 
 				}
@@ -73,7 +81,7 @@ public class DelayedTask {
 		timer.scheduleAtFixedRate(task, 0, 10);
 	}
 
-	public void takeOfTask() {
+	public void takeOffTask() {
 
 		final Timer timer = new Timer();
 		
@@ -85,14 +93,26 @@ public class DelayedTask {
 					public void run() {
 						if (plane.zCurrentPos < 0.5) {
 							plane.zCurrentPos = p.zposWaitingArea1(plane.zCurrentPos);
-							System.out.println("[" + flightName + " Zpos]" + plane.zCurrentPos);
+							System.out.println("[" + flightName + "]" +  " Zpos : " + plane.zCurrentPos);
 							}
-
 					}
 				};
 				timer.scheduleAtFixedRate(task, 0, 10);
 
 			}
 		}, 4800);
+	}
+	
+	public void time() {
+
+		Timer timer = new Timer();
+
+		TimerTask task = new TimerTask() {
+			public void run() {
+				
+				plane.time += 100;
+				}
+			};
+		timer.scheduleAtFixedRate(task, 0, 1);
 	}
 }

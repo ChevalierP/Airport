@@ -9,9 +9,12 @@ public class Plane extends Thread {
 	public double xCurrentPos, yCurrentPos, zCurrentPos, xTargetPos, yTargetPos, xInitialPos,
 			yInitialPos;
 	public double speed = 0;
-	String flightName, targetName, timeOfDeparture;
-	Hour h;
-	Airport airport;
+	public String flightName;
+	String targetName;
+	String timeOfDeparture;
+	public Hour h;
+	public int time;
+	public Airport airport;
 
 	public Plane(double xdepart, double ydepart, String flightName,
 			String targetName, String timeOfDeparture, Airport airport) {
@@ -36,6 +39,7 @@ public class Plane extends Thread {
 		DelayedTask dTask = new DelayedTask(timeInMS, flightName, targetName,
 				timeOfDeparture, airport,this);
 
+		dTask.time();
 		dTask.dTask();
 	}
 }

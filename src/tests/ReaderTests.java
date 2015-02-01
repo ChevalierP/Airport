@@ -70,4 +70,16 @@ public class ReaderTests {
 
 	}
 
+	@Test
+	public void testHour() {
+
+		Hour h = new Hour();
+		int hourInMS = 2*1000*3600 /* 2 h en ms*/ + 11 *1000*60 /* 11min en ms*/ + 50*1000 /* 50s en ms*/;
+		String s = h.msToFullHour(hourInMS);
+
+		System.out.println(s);
+		assertEquals(s, "02:11:50"); // on vérifie que la conversion est correcte
+		
+
+	}
 }

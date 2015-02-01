@@ -21,9 +21,4 @@ public class CCR extends Airport {
 
 	}
 
-	public void writeFile() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

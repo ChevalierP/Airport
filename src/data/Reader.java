@@ -2,6 +2,8 @@ package data;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -48,4 +50,19 @@ public class Reader {
 		return inputData;
 	}
 
+	
+	public void writeFile(String text, String fileName)
+	{
+		try {
+			FileWriter writer = new FileWriter(fileName + ".doc", true);	
+			
+				writer.write(text);
+				writer.write("\n");
+				writer.close(); //libération de la ressource
+			
+		} catch (IOException e) {
+			System.out.println("impossible de créer le fichier");
+		} 
+		
+	}
 }
