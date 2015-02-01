@@ -14,6 +14,7 @@ public class DelayedTask {
 	String timeOfDeparture;
 	Airport airport;
 	Plane plane;
+	final Trajectory p = new Trajectory();
 
 	public DelayedTask(int delay, String flightName, String targetName,
 			String timeOfDeparture, Airport airport, Plane plane) {
@@ -42,7 +43,7 @@ public class DelayedTask {
 
 					updateTask();
 					takeOfTask();
-					
+
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -54,7 +55,6 @@ public class DelayedTask {
 	public void updateTask() {
 
 		Timer timer = new Timer();
-		final Trajectory p = new Trajectory();
 
 		TimerTask task = new TimerTask() {
 			public void run() {
@@ -75,12 +75,24 @@ public class DelayedTask {
 
 	public void takeOfTask() {
 
-		Timer timer = new Timer();
+		final Timer timer = new Timer();
+		
 		timer.schedule(new TimerTask() {
 			public void run() {
 				airport.piste.release();
+
+				TimerTask task = new TimerTask() {
+					public void run() {
+						if (plane.zCurrentPos < 0.5) {
+							plane.zCurrentPos = p.zposWaitingArea1(plane.zCurrentPos);
+							System.out.println("[" + flightName + " Zpos]" + plane.zCurrentPos);
+							}
+
+					}
+				};
+				timer.scheduleAtFixedRate(task, 0, 10);
+
 			}
 		}, 4800);
-
 	}
 }
