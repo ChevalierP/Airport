@@ -9,6 +9,7 @@ public class Plane extends Thread {
 	public double xCurrentPos, yCurrentPos, zCurrentPos, xTargetPos, yTargetPos, xInitialPos,
 			yInitialPos;
 	public double speed = 0;
+	public double theta = 0;
 	public String flightName;
 	String targetName;
 	String timeOfDeparture;

@@ -44,14 +44,8 @@ public class DelayedTask {
 
 					updateTask();
 					takeOffTask();
+
 					
-					while(plane.zCurrentPos > 0.5)
-					{
-						reader.writeFile(String.valueOf(plane.time) + "\n", "Output" + plane.xInitialPos);
-
-					}
-					reader.writeFile(plane.flightName + " arrive sur le premier cercle d'attente à " + plane.h.msToFullHour(plane.time) + "\n", "Output" + plane.xInitialPos);
-
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -86,15 +80,33 @@ public class DelayedTask {
 		final Timer timer = new Timer();
 		
 		timer.schedule(new TimerTask() {
+			 int i = 0;
+
 			public void run() {
 				airport.piste.release();
-
 				TimerTask task = new TimerTask() {
 					public void run() {
 						if (plane.zCurrentPos < 0.5) {
 							plane.zCurrentPos = p.zposWaitingArea1(plane.zCurrentPos);
 							System.out.println("[" + flightName + "]" +  " Zpos : " + plane.zCurrentPos);
 							}
+						else
+						{
+							if(i == 0)
+							{
+								reader.writeFile(plane.flightName + " arrive sur le premier cercle d'attente à " + plane.h.msToFullHour(plane.time) + "\n", "Output" + plane.xInitialPos);
+							}
+							i = 1;
+							
+							plane.xCurrentPos = p.xposWaitingArea(plane.xCurrentPos, plane.theta);
+							System.out.println(plane.xCurrentPos);
+							plane.yCurrentPos = p.xposWaitingArea(plane.yCurrentPos, plane.theta);
+							System.out.println(plane.yCurrentPos);
+							plane.theta += 150/3600;
+
+							
+						}
+						
 					}
 				};
 				timer.scheduleAtFixedRate(task, 0, 10);
