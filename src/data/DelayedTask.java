@@ -35,9 +35,10 @@ public class DelayedTask {
 				System.out.println("\n" + flightName + ":" + " Ready to go !");
 				System.out.println("To " + targetName);
 				System.out.println("At " + timeOfDeparture + "\n");
+				
 
 				try {
-					airport.waitingAreaAlt500.acquire();
+					airport.waitingAreaAlt500.acquire(); //si le cercle est complet l'avion ne demandera pas l'accès à la piste
 					System.out.println("Acquire sur le cercle d'attente");
 					airport.piste.acquire();
 					reader.writeFile(plane.flightName + " s'aligne sur la piste à " + plane.h.msToFullHour(plane.time) + "\n", "Output" + plane.xInitialPos);
@@ -97,14 +98,7 @@ public class DelayedTask {
 								reader.writeFile(plane.flightName + " arrive sur le premier cercle d'attente à " + plane.h.msToFullHour(plane.time) + "\n", "Output" + plane.xInitialPos);
 							}
 							i = 1;
-							
-							plane.xCurrentPos = p.xposWaitingArea(plane.xCurrentPos, plane.theta);
-							System.out.println(plane.xCurrentPos);
-							plane.yCurrentPos = p.xposWaitingArea(plane.yCurrentPos, plane.theta);
-							System.out.println(plane.yCurrentPos);
-							plane.theta += 150/3600;
-
-							
+														
 						}
 						
 					}
@@ -112,7 +106,7 @@ public class DelayedTask {
 				timer.scheduleAtFixedRate(task, 0, 10);
 
 			}
-		}, 4800);
+		}, 48);
 	}
 	
 	public void time() {

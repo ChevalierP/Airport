@@ -49,6 +49,28 @@ public class Reader {
 
 		return inputData;
 	}
+	
+	
+	public int[] findAirportSocket(String targetName)
+	{
+		ArrayList<String> airportsSockets = readFile("Airports.csv", ";");
+		
+		int[] airportFound = new int[3];
+		
+		for(int i = 0; i < airportsSockets.size(); i++)
+		{
+			if(airportsSockets.get(i).equals(targetName) )
+			{
+				airportFound[0] = Integer.valueOf(airportsSockets.get(i+1));
+				airportFound[1] = Integer.valueOf(airportsSockets.get(i+2));
+				airportFound[2] = Integer.valueOf(airportsSockets.get(i+3));
+
+			}
+		}
+		
+		return airportFound;
+		
+	}
 
 	
 	public void writeFile(String text, String fileName)

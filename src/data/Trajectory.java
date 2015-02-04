@@ -22,13 +22,5 @@ public class Trajectory {
 		return z + 0.1/12 * 0.5;
 	}
 	
-	public double xposWaitingArea(double x, double theta)
-	{
-		return (x-2) - 2 * Math.sin(theta)*150/3600;
-	}
 	
-	public double yposWaitingArea(double y, double theta)
-	{
-		return (y-2) + 2 * Math.cos(theta)* 150/3600;
-	}
 }
