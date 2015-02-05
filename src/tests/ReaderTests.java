@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import data.Hour;
-import data.Reader;
+import data.InOut;
 
 public class ReaderTests {
 
 	@Test
 	public void testReadFile() {
 		// lecture du fichier d'input de test
-		Reader r = new Reader();
+		InOut r = new InOut();
 		ArrayList<String> testArray = r.readFile("input.csv", ";");
 
 		// construction du tableau attendu
@@ -51,55 +51,56 @@ public class ReaderTests {
 		// comparaison du tableau obtenu avec celui attendu
 		assertEquals(expectedArray, testArray);
 	}
-	
+
 	@Test
 	public void testReadAirportsFile() {
-		
-		Reader r = new Reader();
-		
+
+		InOut  r = new InOut();
+
 		int[] targetData = new int[3];
 		int[] expectedArray = new int[3];
-		
-		targetData = r.findAirportSocket("Toulouse");
-		expectedArray[0] = Integer.valueOf(0); expectedArray[1] = Integer.valueOf(0); expectedArray[2] = Integer.valueOf(2210);
-		
-		System.out.println(targetData[0]);
-		System.out.println(targetData[1]);
-		System.out.println(targetData[2]);
 
-		
-		assertEquals(expectedArray, targetData);
-		/*
+		targetData = r.findAirportSocket("Toulouse");
+		expectedArray[0] = 0;
+		expectedArray[1] = 0;
+		expectedArray[2] = 2110;
+		assertArrayEquals(expectedArray, targetData);
+
 		targetData = r.findAirportSocket("Paris CdG");
-		expectedArray[0] = 95; expectedArray[1] = 615; expectedArray[2] = 2211;
-		
-		assertEquals(targetData,expectedArray);
-		
+		expectedArray[0] = 95;
+		expectedArray[1] = 615;
+		expectedArray[2] = 2111;
+		assertArrayEquals(expectedArray, targetData);
+
 		targetData = r.findAirportSocket("Nice");
-		expectedArray[0] = 470; expectedArray[1] = 3; expectedArray[2] = 2212;
-		
-		assertEquals(targetData,expectedArray);
-		
+		expectedArray[0] = 470;
+		expectedArray[1] = 3;
+		expectedArray[2] = 2112;
+		assertArrayEquals(expectedArray, targetData);
+
 		targetData = r.findAirportSocket("Bale");
-		expectedArray[0] = 496; expectedArray[1] = 441; expectedArray[2] = 2213;
-		
-		assertEquals(targetData,expectedArray);
-		
+		expectedArray[0] = 496;
+		expectedArray[1] = 441;
+		expectedArray[2] = 2113;
+		assertArrayEquals(expectedArray, targetData);
+
 		targetData = r.findAirportSocket("Lyon");
-		expectedArray[0] = 299; expectedArray[1] = 233; expectedArray[2] = 2214;
-		
-		assertEquals(targetData,expectedArray);
-		
+		expectedArray[0] = 299;
+		expectedArray[1] = 233;
+		expectedArray[2] = 2114;
+		assertArrayEquals(expectedArray, targetData);
+
 		targetData = r.findAirportSocket("Strasbourg");
-		expectedArray[0] = 504; expectedArray[1] = 547; expectedArray[2] = 2215;
-		
-		assertEquals(targetData,expectedArray);
-		
+		expectedArray[0] = 504;
+		expectedArray[1] = 547;
+		expectedArray[2] = 2115;
+		assertArrayEquals(expectedArray, targetData);
+
 		targetData = r.findAirportSocket("Metz");
-		expectedArray[0] = 393; expectedArray[1] = 595; expectedArray[2] = 2216;
-		
-		assertEquals(targetData,expectedArray);
-		*/
+		expectedArray[0] = 393;
+		expectedArray[1] = 595;
+		expectedArray[2] = 2116;
+		assertArrayEquals(expectedArray, targetData);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -124,11 +125,15 @@ public class ReaderTests {
 	public void testHour() {
 
 		Hour h = new Hour();
-		int hourInMS = 2*1000*3600 /* 2 h en ms*/ + 11 *1000*60 /* 11min en ms*/ + 50*1000 /* 50s en ms*/;
+		int hourInMS = 2 * 1000 * 3600 /* 2 h en ms */+ 11 * 1000 * 60 /*
+																		 * 11min
+																		 * en ms
+																		 */+ 50
+				* 1000 /* 50s en ms */;
 		String s = h.msToFullHour(hourInMS);
 
-		assertEquals(s, "02:11:50"); // on vérifie que la conversion est correcte
-		
+		assertEquals(s, "02:11:50"); // on vérifie que la conversion est
+										// correcte
 
 	}
 }

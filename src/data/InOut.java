@@ -7,11 +7,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Reader {
+public class InOut {
 
 	FileInputStream fis;
 
-	public Reader() {
+	public InOut() {
 	}
 
 	public ArrayList<String> readFile(String name, String delimiter) {

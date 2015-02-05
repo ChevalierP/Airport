@@ -3,28 +3,23 @@ package data;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import airport.Airport;
 import threads.Plane;
 
 public class DelayedTask {
 
 	int delay = 0; // en ms
-	String flightName;
-	String targetName;
-	String timeOfDeparture;
-	Airport airport;
 	Plane plane;
 	final Trajectory p = new Trajectory();
-	final Reader reader = new Reader();
+	final InOut reader = new InOut();
 
-	public DelayedTask(int delay, String flightName, String targetName,
-			String timeOfDeparture, Airport airport, Plane plane) {
+	public DelayedTask(int delay, Plane plane) {
 		this.delay = delay;
-		this.flightName = flightName;
-		this.targetName = targetName;
-		this.timeOfDeparture = timeOfDeparture;
-		this.airport = airport;
 		this.plane = plane;
+
+		/* récupère l'angle pour quitter le cercle d'attente n°1 */
+		plane.alphaTakeOff = p.getAlpha(plane.xInitialPos, plane.yInitialPos,
+				plane.targetData[0], plane.targetData[1]);
+
 	}
 
 	public void dTask() {
@@ -32,23 +27,28 @@ public class DelayedTask {
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
 			public void run() {
-				System.out.println("\n" + flightName + ":" + " Ready to go !");
-				System.out.println("To " + targetName);
-				System.out.println("At " + timeOfDeparture + "\n");
-				
-
 				try {
-					airport.waitingAreaAlt500.acquire(); //si le cercle est complet l'avion ne demandera pas l'accès à la piste
-					System.out.println("Acquire sur le cercle d'attente");
-					airport.piste.acquire();
-					reader.writeFile(plane.flightName + " s'aligne sur la piste à " + plane.h.msToFullHour(plane.time) + "\n", "Output" + plane.xInitialPos);
+					/* contacter le CCR de destination avant */
 
-					updateTask();
-					takeOffTask();
+					plane.airport.waitingAreaAlt500.acquire(); // si le cercle
+																// est complet
+																// l'avion ne
+																// demandera pas
+																// l'accès à la
+																// piste
+					plane.airport.runway.acquire();
+					reader.writeFile(
+							plane.flightName + " s'aligne sur la piste à "
+									+ plane.h.msToFullHour(plane.time) + "\n",
+							"Output" + plane.xInitialPos);
 
-					
+					updateTask(); /* prie de vitesse sur la piste */
+					takeOffTask(); /*
+									 * prise d'altitude une fois en bout de
+									 * piste
+									 */
+
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -62,14 +62,8 @@ public class DelayedTask {
 		TimerTask task = new TimerTask() {
 			public void run() {
 				if (plane.speed < 300) {
-					plane.xCurrentPos = p.xposTakeOffupdate(plane.xCurrentPos);
-					plane.speed = p.speedTakeOffupdate(plane.speed);
-
-					System.out.println("[" + flightName + "]" + " Xpos : "
-							+ plane.xCurrentPos);
-					System.out.println("[" + flightName + "]" + " Speed : "
-							+ plane.speed);
-
+					plane.xCurrentPos += p.xposTakeOffupdate();
+					plane.speed += p.speedTakeOffupdate();
 				}
 			}
 		};
@@ -79,46 +73,67 @@ public class DelayedTask {
 	public void takeOffTask() {
 
 		final Timer timer = new Timer();
-		
-		timer.schedule(new TimerTask() {
-			 int i = 0;
 
+		timer.schedule(new TimerTask() {
+			int i = 0;
+			int j = 0;
 			public void run() {
-				airport.piste.release();
+				plane.airport.runway.release(); /* libère l'accès à la piste */
 				TimerTask task = new TimerTask() {
-					public void run() {
+					public void run() { /*
+										 * fait monter l'avion à l'altitude du
+										 * premier cercle d'attente
+										 */
 						if (plane.zCurrentPos < 0.5) {
-							plane.zCurrentPos = p.zposWaitingArea1(plane.zCurrentPos);
-							System.out.println("[" + flightName + "]" +  " Zpos : " + plane.zCurrentPos);
-							}
-						else
-						{
-							if(i == 0)
-							{
-								reader.writeFile(plane.flightName + " arrive sur le premier cercle d'attente à " + plane.h.msToFullHour(plane.time) + "\n", "Output" + plane.xInitialPos);
+							plane.zCurrentPos += p.zposWaitingArea1();
+						} else {
+							if (i == 0) {
+								/* on log l'arrivée de l'avion sur le 1er cercle */
+								reader.writeFile(
+										plane.flightName
+												+ " arrive sur le premier cercle d'attente à "
+												+ plane.h.msToFullHour(plane.time)
+												+ "\n", "Output"
+												+ plane.xInitialPos);
 							}
 							i = 1;
-														
+							if (plane.theta <= plane.alphaTakeOff) {
+								plane.theta += p.setTheta();
+								System.out.println("[" + plane.flightName
+										+ "] : " + plane.theta);
+							} else {
+								if (j == 0) {
+									plane.airport.waitingAreaAlt500.release();
+									reader.writeFile(
+											plane.flightName
+													+ " quitte le premier cercle d'attente à "
+													+ plane.h.msToFullHour(plane.time)
+													+ " avec un angle de : "
+													+ plane.theta*(180/Math.PI) + "degrés",
+											"Output" + plane.xInitialPos);
+								}
+								j = 1;
+							}
+
 						}
-						
+
 					}
 				};
 				timer.scheduleAtFixedRate(task, 0, 10);
-
 			}
-		}, 48);
+		}, 4800);
 	}
-	
-	public void time() {
 
+	public void time() {
+		/* horloge de l'avion créée dès l'initialisation du thread */
 		Timer timer = new Timer();
 
 		TimerTask task = new TimerTask() {
 			public void run() {
-				
+
 				plane.time += 100;
-				}
-			};
+			}
+		};
 		timer.scheduleAtFixedRate(task, 0, 1);
 	}
 }

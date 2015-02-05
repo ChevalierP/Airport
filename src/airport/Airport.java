@@ -3,7 +3,7 @@ package airport;
 import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 
-import data.Reader;
+import data.InOut;
 
 public abstract class Airport {
 
@@ -15,7 +15,7 @@ public abstract class Airport {
 	protected double xPos = 0;
 	protected double yPos = 0;
 
-	public Semaphore piste = new Semaphore(1);
+	public Semaphore runway = new Semaphore(1);
 	public Semaphore parking = new Semaphore(30);
 
 	public Semaphore waitingAreaAlt500 = new Semaphore(5);
@@ -29,7 +29,7 @@ public abstract class Airport {
 	public abstract void create();
 
 	public void readFile() {
-		Reader r = new Reader();
+		InOut r = new InOut();
 
 		ArrayList<String> inputData = new ArrayList<String>();
 		inputData = r.readFile("input.csv", ";");
